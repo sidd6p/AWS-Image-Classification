@@ -142,7 +142,12 @@ def get_loaded_model(checkpoint):
     return model
 
 
-def get_prediction(model, image, top_k):
+def get_prediction(model, image, top_k, gpu):
+    if gpu:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    else:
+        device = torch.device("cpu")
+    model, image = model.to(device), image.to(device)
     model.eval()
 
     with torch.no_grad():
