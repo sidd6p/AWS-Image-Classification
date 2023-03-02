@@ -1,28 +1,27 @@
-import argparse
+import json
+
+import model_utils
+import input_utils
+import data_utils
 
 
-def get_input_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("path_to_image", action="store", help="Give image path")
-    parser.add_argument("checkpoint", action="store", help="Give checkpoint path")
-    parser.add_argument(
-        "--top_k", type=int, default=3, help="Return top K most likely classes"
-    )
-    parser.add_argument(
-        "--category_names",
-        type=str,
-        default="cat_to_name.json",
-        help="path to the JSON file",
-    )
-    parser.add_argument("--gpu", dest="gpu", action="store_true", help="Set GPU")
+args = input_utils.get_predict_args()
 
-    return parser.parse_args()
+top_k = args.top_k
+category_names = args.category_names
+gpu = False if args.gpu is None else True
+checkpoint = args.checkpoint
+category_names = args.category_names
 
+model = model_utils.get_loaded_model(checkpoint)
+probs, predict_classes = model_utils.get_prediction(
+    model, data_utils.process_image(args.image_path), top_k
+)
 
-def main():
-    data = get_input_args()
-    print(data)
+with open(category_names, "r") as f:
+    cat_to_name = json.load(f)
 
-
-if __name__ == "__main__":
-    main()
+    for prob, predict_classe in zip(probs, predict_classes):
+        print(prob)
+        print(predict_classes)
+        print(cat_to_name[predict_classe])

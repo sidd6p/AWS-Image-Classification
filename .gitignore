@@ -1,6 +1,10 @@
+# Checkpoint
+checkpoint.pth
+
 # Dataset
 /flowers
 flowers.zip
+/small_flowers
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
