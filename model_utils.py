@@ -130,7 +130,12 @@ def save_model(model, architecture, save_dir, data):
 
 
 def get_loaded_model(checkpoint):
-    checkpoint = torch.load(checkpoint)
+    if torch.cuda.is_available():
+        map_location = lambda storage, loc: storage.cuda()
+    else:
+        map_location = "cpu"
+
+    checkpoint = torch.load(checkpoint, map_location=map_location)
     model = checkpoint["model"]
     model.class_to_idx = checkpoint["class_to_idx"]
     model.classifier = checkpoint["classifier"]
