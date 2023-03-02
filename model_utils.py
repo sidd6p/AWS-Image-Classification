@@ -1,44 +1,31 @@
 import torch
+import network_utils
+
 from torch import nn
 from torch import optim
 from torchvision import models
 
 
-def build_network(architecture, hidden_units):
-    print(
-        "Building network ... architectur: {}, hidden_units: {}".format(
-            architecture, hidden_units
-        )
-    )
-
+def get_network(architecture, hidden_units, drop_rate, output_size):
     if architecture == "vgg16":
         model = models.vgg16(pretrained=True)
-        input_units = 25088
+        input_size = 25088
     elif architecture == "vgg13":
         model = models.vgg13(pretrained=True)
-        input_units = 25088
+        input_size = 25088
     elif architecture == "alexnet":
         model = models.alexnet(pretrained=True)
-        input_units = 9216
+        input_size = 9216
     elif architecture == "densenet":
         model = models.densenet121(pretrained=True)
-        input_units = 1024
+        input_size = 1024
 
     for param in model.parameters():
         param.requires_grad = False
 
-    classifier = nn.Sequential(
-        nn.Linear(input_units, hidden_units),
-        nn.ReLU(),
-        nn.Dropout(p=0.2),
-        nn.Linear(hidden_units, hidden_units // 2),
-        nn.ReLU(),
-        nn.Dropout(p=0.2),
-        nn.Linear(hidden_units // 2, 102),
-        nn.LogSoftmax(dim=1),
+    model.classifier = network_utils.MyNetwork(
+        input_size, hidden_units, drop_rate, output_size
     )
-
-    model.classifier = classifier
 
     print("Finished building network.")
 
@@ -181,7 +168,7 @@ def load_model(filepath):
     print("Loading and building model from {}".format(filepath))
 
     checkpoint = torch.load(filepath)
-    model = build_network(checkpoint["architecture"], checkpoint["hidden_units"])
+    model = get_network(checkpoint["architecture"], checkpoint["hidden_units"])
     model.load_state_dict(checkpoint["model_state_dict"])
     model.class_to_idx = checkpoint["class_to_idx"]
 
