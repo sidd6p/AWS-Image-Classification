@@ -1,36 +1,46 @@
 import argparse
+from data_utils import load_data
+import model_utils
+import input_utils
+
+parser = argparse.ArgumentParser(
+    description="Training a neural network on a given dataset"
+)
+parser.add_argument(
+    "data_directory",
+    help="Path to dataset on which the neural network should be trained on",
+)
+parser.add_argument(
+    "--save_dir", help="Path to directory where the checkpoint should be saved"
+)
+parser.add_argument("--arch", help="Network architecture (default 'vgg16')")
+parser.add_argument("--learning_rate", help="Learning rate")
+parser.add_argument("--hidden_units", help="Number of hidden units")
+parser.add_argument("--epochs", help="Number of epochs")
+parser.add_argument("--gpu", help="Use GPU for training", action="store_true")
 
 
-def get_input_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("data_directory", action="store", help="Set path to folder")
-    parser.add_argument(
-        "--save_dir", type=str, default="/", help="Set directory to save checkpoints"
-    )
-    parser.add_argument(
-        "--arch", type=str, default="vgg", help="Set model architecture"
-    )
-    parser.add_argument(
-        "--learning_rate",
-        type=float,
-        default=0.01,
-        help="Set learning rate hyperparameter",
-    )
-    parser.add_argument(
-        "--hidden_units", type=int, default=512, help="Set hidden units hyperparameter"
-    )
-    parser.add_argument(
-        "--epochs", type=int, default=20, help="Set epochs hyperparameter"
-    )
-    parser.add_argument("--gpu", dest="gpu", action="store_true", help="Set GPU")
+args = input_utils.get_input_args()
 
-    return parser.parse_args()
+data_directory = args.data_directory
+save_dir = args.save_dir
+network_architecture = args.arch
+learning_rate = args.learning_rate
+hidden_units = int(args.hidden_units)
+epochs = int(args.epochs)
+gpu = False if args.gpu is None else True
 
 
-def main():
-    data = get_input_args()
-    print(data)
+train_data, trainloader, validloader, testloader = load_data(data_directory)
 
 
-if __name__ == "__main__":
-    main()
+model = model_utils.build_network(network_architecture, hidden_units)
+model.class_to_idx = train_data.class_to_idx
+
+model, criterion = model_utils.train_network(
+    model, epochs, learning_rate, trainloader, validloader, gpu
+)
+model_utils.evaluate_model(model, testloader, criterion, gpu)
+model_utils.save_model(
+    model, network_architecture, hidden_units, epochs, learning_rate, save_dir
+)
