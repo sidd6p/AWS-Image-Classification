@@ -5,8 +5,7 @@ Going forward, AI algorithms will be incorporated into more and more everyday ap
 
 In this project, you'll train an image classifier to recognize different species of flowers. You can imagine using something like this in a phone app that tells you the name of the flower your camera is looking at. In practice you'd train this classifier, then export it for use in your application. We'll be using [this dataset](http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) of 102 flower categories, you can see a few examples below. 
 
-<img src='assets/Flowers.png' width=500px>
-
+<img width="260" alt="output_36_0" src="https://user-images.githubusercontent.com/91800813/233777768-171b8cd2-2636-44a4-98e7-66d695d6d609.png">
 The project is broken down into multiple steps:
 
 * Load and preprocess the image dataset
@@ -442,7 +441,7 @@ imshow(process_image('flowers/test/3/image_06641.jpg'))
 ```
 
 
-![png](output_30_0.png)
+<img width="260" alt="output_30_0" src="https://user-images.githubusercontent.com/91800813/233777732-f606da7c-82c1-40c2-a429-b0c9552dd0de.png">
 
 
 ## Class Prediction
@@ -527,11 +526,11 @@ view_classify('flowers/test/3/image_06641.jpg', probs, predict_classes)
 ```
 
 
-![png](output_36_0.png)
+<img width="260" alt="output_36_0" src="https://user-images.githubusercontent.com/91800813/233777740-1368491d-33d6-40b9-aa35-eea45014e649.png">
 
 
 
-![png](output_36_1.png)
+<img width="446" alt="output_36_1" src="https://user-images.githubusercontent.com/91800813/233777745-229473b4-5487-4a5f-8b8a-9025c4ae41dc.png">
 
 
 <font color='red'>**Reminder for Workspace users:** If your network becomes very large when saved as a checkpoint, there might be issues with saving backups in your workspace. You should reduce the size of your hidden layers and train again. 
