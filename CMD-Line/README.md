@@ -72,7 +72,7 @@
 ```
 - Install requirements
 ```bash 
-    pip install requirements.txt
+    pip install -r requirements.txt
 ```
 - Train Model
 ```bash 
