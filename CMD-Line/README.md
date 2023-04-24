@@ -89,7 +89,7 @@ Train a new network on a data set with train.py
 - Basic usage: python train.py data_directory
 - Options: 
   - __Set directory to save checkpoints__: ``` python train.py data_dir --save_dir save_directory ```
-  - __Coose architecture__: ```python train.py data_dir --arch "vgg13" ```
+  - __Choose architecture__: ```python train.py data_dir --arch "vgg13" ```
     - These 4 architecture options are available
       1. vgg16
       2. vgg13
