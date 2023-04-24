@@ -62,12 +62,12 @@
 - Clone the project
 
 ```bash
-  git clone https://github.com/sidd6p/AWS-flower-detection-cmd.git
+  git clone https://github.com/sidd6p/AWS-Image-Classification.git
 ```
 
-- Go to the AWS-flower-detection/CMD-Line directory
+- Go to the AWS-Image-Classification/CMD-Line directory
 ```bash
-  cd AWS-flower-detection/CMD-Line 
+  cd AWS-Image-Classification/CMD-Line 
 
 ```
 - Install requirements
