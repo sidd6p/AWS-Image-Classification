@@ -13,6 +13,11 @@ Train a new network on a data set with train.py
 - Options: 
   - __Set directory to save checkpoints__: ```py python train.py data_dir --save_dir save_directory ```
   - __Coose architecture__: ```py python train.py data_dir --arch "vgg13" ```
+    - These 4 architecture options are available
+      1. vgg16
+      2. vgg13
+      3. alexnet
+      4. densenet
   - __Set hyperparameters__: ```py python train.py data_dir --learning_rate 0.01 --hidden_units 512 --epochs 20 ```
   - __Use GPU for training__: ```py python train.py data_dir --gpu ```
   
