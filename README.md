@@ -1,5 +1,5 @@
-# This is Flower classifiaction project for the Amazon AI Programming with Python Nanodegree on Udacity
-
+# This is Image classifiaction project for the Amazon AI Programming with Python Nanodegree on Udacity
+> This project use flower dataset for classification, but it can be use for any dataset as long as dataset is in correct format and structured into correct directory hierarchical. Look into "CMD-Line/flowers_dataset_small" for understanding the dateset hierarchical
 
 ![image](https://user-images.githubusercontent.com/91800813/234004940-2619b469-1e93-4b3b-893a-dfb54ac050a5.png)
 
