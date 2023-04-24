@@ -1,1 +1,10 @@
-# This is Flower classifiaction based on cmd line inputs
+# This is Flower classifiaction project for the Amazon AI Programming with Python Nanodegree on Udacity
+
+
+![image](https://user-images.githubusercontent.com/91800813/234004940-2619b469-1e93-4b3b-893a-dfb54ac050a5.png)
+
+[Certificate Link](https://drive.google.com/file/d/1NCuu7x-JIk7iJ8ZoSCSsGjbdZF3tAuyz/view?usp=share_link)
+
+- There are two part in this project
+  - Jupyter Notebook, where you run the whole project in jupyter notebook. Check out "Jupyter-Notebook" for more detail
+  - Command Line, where you run whole project as a command line utility. Check out "CMD-Line" for more detail
